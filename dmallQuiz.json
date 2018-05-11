@@ -5,7 +5,7 @@
     {
       "enabled": true,
       "key": "IP",
-      "value": "39.153.92.13",
+      "value": "localhost",
       "type": "text"
     },
     {
