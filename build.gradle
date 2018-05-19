@@ -35,7 +35,7 @@ dependencies {
 }
 
 flyway {
-	url = 'jdbc:mysql://localhost:3306/jxshop'
+	url = 'jdbc:mysql://localhost:3306/jxshop?useUnicode=true&characterEncoding=utf-8'
 	user = 'root'
 	password = '123456'
 }
