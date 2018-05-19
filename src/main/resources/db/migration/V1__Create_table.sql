@@ -8,7 +8,7 @@ CREATE TABLE `product` (
 
 CREATE TABLE `inventory` (
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
   KEY `product_id` (`product_id`),
   CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
