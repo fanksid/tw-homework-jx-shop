@@ -24,11 +24,15 @@ public class LogisticsService {
     @Autowired
     private LogisticsRepository logisticsRepository;
 
+    @Autowired
+    private InventoryService inventoryService;
+
     @Transactional
     public void signed(Long logisticsId, Long orderId) {
         setLogisticsStatusToSignedAndUpdateSignedTime(logisticsId);
         setOrderStatusToFinishAndUpdateFinishTime(orderId);
-        // todo: 减少真实库存
+
+        inventoryService.removeLockCount(orderId);
     }
 
     private void setOrderStatusToFinishAndUpdateFinishTime(@PathVariable Long orderId) {
