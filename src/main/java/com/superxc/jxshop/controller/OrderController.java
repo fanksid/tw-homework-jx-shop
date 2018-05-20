@@ -7,7 +7,6 @@ import com.superxc.jxshop.entity.OrderItem;
 import com.superxc.jxshop.repository.InventoryRepository;
 import com.superxc.jxshop.repository.LogisticsRepository;
 import com.superxc.jxshop.repository.OrderRepository;
-import com.superxc.jxshop.repository.ProductRepository;
 import com.superxc.jxshop.service.InventoryService;
 import com.superxc.jxshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

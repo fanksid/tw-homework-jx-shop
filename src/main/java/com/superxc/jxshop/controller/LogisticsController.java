@@ -4,6 +4,7 @@ import com.superxc.jxshop.entity.Logistics;
 import com.superxc.jxshop.entity.Order;
 import com.superxc.jxshop.repository.LogisticsRepository;
 import com.superxc.jxshop.repository.OrderRepository;
+import com.superxc.jxshop.service.LogisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,13 @@ import java.util.Optional;
 public class LogisticsController {
 
     private static final String SHIPPING = "shipping";
-    private static final String SIGNED = "signed";
-    public static final String FINISH = "finish";
+    public static final String SIGNED = "signed";
 
     @Autowired
     private LogisticsRepository logisticsRepository;
 
     @Autowired
-    private OrderRepository orderRepository;
+    private LogisticsService logisticsService;
 
     /**
      * get logistics by id
@@ -59,9 +59,7 @@ public class LogisticsController {
                     setLogisticsStatusToShippingAndUpdateOutboundTime(logisticsId);
                     break;
                 case SIGNED:
-                    setLogisticsStatusToSignedAndUpdateSignedTime(logisticsId);
-                    setOrderStatusToFinishAndUpdateFinishTime(orderId);
-                    // TODO: 减少真实库存
+                    logisticsService.signed(logisticsId, orderId);
                     break;
                 default:
                     throw new Exception("unsupported status");
@@ -72,22 +70,9 @@ public class LogisticsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private void setOrderStatusToFinishAndUpdateFinishTime(@PathVariable Long orderId) {
-        Order order = orderRepository.getOne(orderId);
-        order.setStatus(FINISH);
-        order.setFinishTime(getNowTimeStamp());
-        orderRepository.save(order);
-    }
 
     private Timestamp getNowTimeStamp() {
         return new Timestamp(System.currentTimeMillis());
-    }
-
-    private void setLogisticsStatusToSignedAndUpdateSignedTime(@PathVariable Long logisticsId) {
-        Logistics logistics = logisticsRepository.getOne(logisticsId);
-        logistics.setStatus(SIGNED);
-        logistics.setSignedTime(getNowTimeStamp());
-        logisticsRepository.save(logistics);
     }
 
     private void setLogisticsStatusToShippingAndUpdateOutboundTime(@PathVariable Long logisticsId) {
