@@ -57,7 +57,7 @@ public class ProductController {
         Product savedProduct = productService.add(product);
         HttpHeaders headers = new HttpHeaders();
         // TODO: 这里的url生成是否有更好的方式？
-        headers.add("location", "http://localhost:8083/get/" + savedProduct.getId());
+        headers.add("location", "http://localhost:8083/products/" + savedProduct.getId());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
