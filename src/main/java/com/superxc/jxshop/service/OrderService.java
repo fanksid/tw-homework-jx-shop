@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.superxc.jxshop.controller.OrderController.PAID;
+import static com.superxc.jxshop.controller.OrderController.WITHDRAWN;
 
 @Service
 public class OrderService {
@@ -29,6 +30,9 @@ public class OrderService {
     @Autowired
     private LogisticsRepository logisticsRepository;
 
+    @Autowired
+    private InventoryService inventoryService;
+
     @Transactional
     public void pay(Long orderId) {
         Logistics logistics = new Logistics(null, "inbound", null, null);
@@ -40,6 +44,25 @@ public class OrderService {
         order.setLogisticsId(logistics.getId());
 
         orderRepository.save(order);
+    }
+
+    @Transactional
+    public void withdrawn(Long orderId) {
+        Order order = orderRepository.getOne(orderId);
+        order.setStatus(WITHDRAWN);
+        order.setCancelTime(new Timestamp(System.currentTimeMillis()));
+        orderRepository.save(order);
+
+        unlockInventory(order);
+    }
+
+    private void unlockInventory(Order order) {
+        for (OrderItem orderItem : order.getPurchaseItemList()) {
+            Optional<Inventory> optionalInventory = inventoryRepository.findById(orderItem.getProductId());
+            if (optionalInventory.isPresent()) {
+                inventoryService.unlockCount(optionalInventory.get(), orderItem.getPurchaseCount());
+            }
+        }
     }
 
     @Transactional

@@ -24,7 +24,7 @@ import java.util.Optional;
 public class OrderController {
 
     public static final String PAID = "paid";
-    private static final String WITHDRAWN = "withdrawn";
+    public static final String WITHDRAWN = "withdrawn";
 
     @Autowired
     private OrderRepository orderRepository;
@@ -90,26 +90,13 @@ public class OrderController {
                     orderService.pay(id);
                     break;
                 case WITHDRAWN:
-                    order.setStatus(WITHDRAWN);
-                    order.setCancelTime(new Timestamp(System.currentTimeMillis()));
-                    orderRepository.save(order);
-
-                    unlockInventory(order);
+                    orderService.withdrawn(id);
                     break;
             }
 
             return new ResponseEntity<String>(HttpStatus.OK);
         }
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
-    }
-
-    private void unlockInventory(Order order) {
-        for (OrderItem orderItem : order.getPurchaseItemList()) {
-            Optional<Inventory> optionalInventory = inventoryRepository.findById(orderItem.getProductId());
-            if (optionalInventory.isPresent()) {
-                inventoryService.unlockCount(optionalInventory.get(), orderItem.getPurchaseCount());
-            }
-        }
     }
 
     /**
