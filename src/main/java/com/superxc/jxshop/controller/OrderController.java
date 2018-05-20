@@ -23,7 +23,7 @@ import java.util.Optional;
 @RequestMapping(value = "/orders")
 public class OrderController {
 
-    private static final String PAID = "paid";
+    public static final String PAID = "paid";
     private static final String WITHDRAWN = "withdrawn";
 
     @Autowired
@@ -87,14 +87,7 @@ public class OrderController {
             Order order = optionalOrder.get();
             switch (orderStatus) {
                 case PAID:
-                    order.setStatus(PAID);
-                    order.setPayTime(new Timestamp(System.currentTimeMillis()));
-
-                    Logistics logistics = new Logistics(null, "inbound", null, null);
-                    logistics = logisticsRepository.save(logistics);
-
-                    order.setLogisticsId(logistics.getId());
-                    orderRepository.save(order);
+                    orderService.pay(id);
                     break;
                 case WITHDRAWN:
                     order.setStatus(WITHDRAWN);

@@ -1,13 +1,7 @@
 package com.superxc.jxshop.service;
 
-import com.superxc.jxshop.entity.Inventory;
-import com.superxc.jxshop.entity.Order;
-import com.superxc.jxshop.entity.OrderItem;
-import com.superxc.jxshop.entity.Product;
-import com.superxc.jxshop.repository.InventoryRepository;
-import com.superxc.jxshop.repository.OrderItemRepository;
-import com.superxc.jxshop.repository.OrderRepository;
-import com.superxc.jxshop.repository.ProductRepository;
+import com.superxc.jxshop.entity.*;
+import com.superxc.jxshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+
+import static com.superxc.jxshop.controller.OrderController.PAID;
 
 @Service
 public class OrderService {
@@ -29,6 +25,22 @@ public class OrderService {
 
     @Autowired
     private InventoryRepository inventoryRepository;
+
+    @Autowired
+    private LogisticsRepository logisticsRepository;
+
+    @Transactional
+    public void pay(Long orderId) {
+        Logistics logistics = new Logistics(null, "inbound", null, null);
+        logistics = logisticsRepository.save(logistics);
+
+        Order order = orderRepository.getOne(orderId);
+        order.setStatus(PAID);
+        order.setPayTime(new Timestamp(System.currentTimeMillis()));
+        order.setLogisticsId(logistics.getId());
+
+        orderRepository.save(order);
+    }
 
     @Transactional
     public Order newOrder(List<OrderItem> orderItems) {
