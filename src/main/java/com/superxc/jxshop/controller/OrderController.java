@@ -2,12 +2,10 @@ package com.superxc.jxshop.controller;
 
 import com.superxc.jxshop.entity.Order;
 import com.superxc.jxshop.entity.OrderItem;
-import com.superxc.jxshop.repository.InventoryRepository;
-import com.superxc.jxshop.repository.LogisticsRepository;
 import com.superxc.jxshop.repository.OrderRepository;
-import com.superxc.jxshop.service.InventoryService;
 import com.superxc.jxshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +27,11 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @Autowired
-    private LogisticsRepository logisticsRepository;
+    @Value("${app.host}")
+    private String host;
 
-    @Autowired
-    private InventoryRepository inventoryRepository;
-
-    @Autowired
-    private InventoryService inventoryService;
+    @Value("${app.port}")
+    private String port;
 
     /**
      * create a order
@@ -51,7 +46,8 @@ public class OrderController {
             return new ResponseEntity<String>("purchase failed", HttpStatus.BAD_REQUEST);
         }
         HttpHeaders headers = new HttpHeaders();
-        headers.add("location", "http://localhost:8083/orders/" + order.getId());
+
+        headers.add("location", String.format("http://%s:%s/orders/%d", host, port, order.getId()));
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 

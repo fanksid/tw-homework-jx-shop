@@ -4,6 +4,7 @@ import com.superxc.jxshop.entity.Product;
 import com.superxc.jxshop.repository.ProductRepository;
 import com.superxc.jxshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,12 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Value("${app.host}")
+    private String host;
+
+    @Value("${app.port}")
+    private String port;
 
     /**
      * list products
@@ -56,8 +63,8 @@ public class ProductController {
     public ResponseEntity<String> add(@RequestBody Product product) {
         Product savedProduct = productService.add(product);
         HttpHeaders headers = new HttpHeaders();
-        // TODO: 这里的url生成是否有更好的方式？
-        headers.add("location", "http://localhost:8083/products/" + savedProduct.getId());
+
+        headers.add("location", String.format("http://%s:%s/products/%d", host, port, savedProduct.getId()));
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
