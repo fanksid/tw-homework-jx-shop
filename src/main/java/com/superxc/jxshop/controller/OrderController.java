@@ -1,7 +1,5 @@
 package com.superxc.jxshop.controller;
 
-import com.superxc.jxshop.entity.Inventory;
-import com.superxc.jxshop.entity.Logistics;
 import com.superxc.jxshop.entity.Order;
 import com.superxc.jxshop.entity.OrderItem;
 import com.superxc.jxshop.repository.InventoryRepository;
@@ -15,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 

@@ -69,8 +69,8 @@ public class ProductController {
      */
     @GetMapping(value = "/{id}")
     public Product getById(@PathVariable Long id) {
-        // TODO: 返回的信息里应该包含库存量
-        return productRepository.findById(id).get();
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        return optionalProduct.isPresent() ? optionalProduct.get() : null;
     }
 
     /**
