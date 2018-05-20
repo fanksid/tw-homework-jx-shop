@@ -628,7 +628,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://{{IP}}:{{port}}/logisticsRecords/1/orders/1?logisticsStatus=shipping",
+							"raw": "http://{{IP}}:{{port}}/logisticsRecords/10/orders/1?logisticsStatus=shipping",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
@@ -636,7 +636,7 @@
 							"port": "{{port}}",
 							"path": [
 								"logisticsRecords",
-								"1",
+								"10",
 								"orders",
 								"1"
 							],
@@ -672,7 +672,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://{{IP}}:{{port}}/logisticsRecords/1/orders/1?logisticsStatus=signed",
+							"raw": "http://{{IP}}:{{port}}/logisticsRecords/10/orders/1?logisticsStatus=signed",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
@@ -680,7 +680,7 @@
 							"port": "{{port}}",
 							"path": [
 								"logisticsRecords",
-								"1",
+								"10",
 								"orders",
 								"1"
 							],
@@ -707,9 +707,10 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "95bb850a-e302-419a-bb44-33b449c64f98",
 								"type": "text/javascript",
 								"exec": [
-									"tests[\"Status code is 200\"] = responseCode.code === 204;"
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
 								]
 							}
 						}
