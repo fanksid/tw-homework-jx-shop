@@ -24,7 +24,6 @@ public class OrderController {
 
     @PostMapping(value = "/orders")
     public ResponseEntity<String> add(@RequestBody List<OrderItem> orderItems) {
-//        orderItems.forEach(System.out::println);
         Order order = orderService.newOrder(orderItems);
         HttpHeaders headers = new HttpHeaders();
         headers.add("location", "http://localhost:8083/orders/" + order.getId());
@@ -38,5 +37,18 @@ public class OrderController {
             return optionalOrder.get();
         }
         return null;
+    }
+
+    @PutMapping(value = "/orders/{id}")
+    public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam String orderStatus) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            // TODO: 这里应当校验输入的status的合法性
+            order.setStatus(orderStatus);
+            orderRepository.save(order);
+            return new ResponseEntity<String>(HttpStatus.OK);
+        }
+        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }
 }

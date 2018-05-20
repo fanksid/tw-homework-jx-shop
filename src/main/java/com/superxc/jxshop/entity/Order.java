@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "jxOrder")
+@Table(name = "jxOrder") // order是mysql的关键字，故加上jx前缀
 public class Order {
 
     @Id
