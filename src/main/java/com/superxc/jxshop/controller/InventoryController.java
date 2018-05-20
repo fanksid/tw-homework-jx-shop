@@ -18,6 +18,13 @@ public class InventoryController {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+    /**
+     * update product inventory
+     *
+     * @param id product id
+     * @param newInventory
+     * @return
+     */
     @PutMapping(value = "/inventories/{id}")
     public ResponseEntity<String> update(@PathVariable Long id, @RequestBody Inventory newInventory) {
         Optional<Inventory> optionalInventory = inventoryRepository.findById(id);

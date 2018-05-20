@@ -23,6 +23,12 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * create a order
+     *
+     * @param orderItems
+     * @return
+     */
     @PostMapping()
     public ResponseEntity<String> add(@RequestBody List<OrderItem> orderItems) {
         Order order = orderService.newOrder(orderItems);
@@ -31,6 +37,12 @@ public class OrderController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
+    /**
+     * get a order
+     *
+     * @param id order id
+     * @return order
+     */
     @GetMapping(value = "/{id}")
     public Order get(@PathVariable Long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
@@ -40,6 +52,13 @@ public class OrderController {
         return null;
     }
 
+    /**
+     * update order status
+     *
+     * @param id order id
+     * @param orderStatus new status
+     * @return
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam String orderStatus) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
@@ -51,5 +70,15 @@ public class OrderController {
             return new ResponseEntity<String>(HttpStatus.OK);
         }
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * get orders by user id
+     * @param userId
+     * @return
+     */
+    @GetMapping
+    public List<Order> getOrdersByUserId(@RequestParam Long userId) {
+        return orderRepository.findAllByUserId(userId);
     }
 }
