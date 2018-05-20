@@ -27,13 +27,14 @@ CREATE TABLE `jxOrder` (
   `status` varchar(20) NOT NULL,
   `createTime` datetime DEFAULT CURRENT_TIMESTAMP,
   `payTime` datetime DEFAULT NULL,
-  `logisticsId` int(11),
+  `logisticsId` int(11) DEFAULT NULL,
   `userId` int(11) NOT NULL,
   `cancelTime` datetime DEFAULT NULL,
+  `finishTime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `logistics_id` (`logisticsId`),
   CONSTRAINT `jxOrder_ibfk_1` FOREIGN KEY (`logisticsId`) REFERENCES `Logistics` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `OrderItem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

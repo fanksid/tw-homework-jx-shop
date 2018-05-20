@@ -25,6 +25,16 @@ public class Order {
 
     private Timestamp cancelTime;
 
+    private Timestamp finishTime;
+
+    public Timestamp getFinishTime() {
+        return finishTime;
+    }
+
+    public void setFinishTime(Timestamp finishTime) {
+        this.finishTime = finishTime;
+    }
+
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "orderId")
     private List<OrderItem> orderItems = new ArrayList<>();
@@ -36,13 +46,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(String status, Timestamp createTime, Timestamp payTime, Long logisticsId, Long userId, Timestamp cancelTime) {
+    public Order(String status, Timestamp createTime, Timestamp payTime, Long logisticsId, Long userId, Timestamp cancelTime, Timestamp finishTime) {
         this.status = status;
         this.createTime = createTime;
         this.payTime = payTime;
         this.logisticsId = logisticsId;
         this.userId = userId;
         this.cancelTime = cancelTime;
+        this.finishTime = finishTime;
     }
 
     public Long getId() {
