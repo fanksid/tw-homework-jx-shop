@@ -19,16 +19,16 @@ public class Logistics {
 
     private Timestamp signedTime;
 
-    private String deliverMan;
+    private String deliveryMan;
 
     public Logistics() {
     }
 
-    public Logistics(Timestamp outboundTime, String status, Timestamp signedTime, String deliverMan) {
+    public Logistics(Timestamp outboundTime, String status, Timestamp signedTime, String deliveryMan) {
         this.outboundTime = outboundTime;
         this.status = status;
         this.signedTime = signedTime;
-        this.deliverMan = deliverMan;
+        this.deliveryMan = deliveryMan;
     }
 
     public Long getId() {
@@ -63,11 +63,11 @@ public class Logistics {
         this.signedTime = signedTime;
     }
 
-    public String getDeliverMan() {
-        return deliverMan;
+    public String getDeliveryMan() {
+        return deliveryMan;
     }
 
-    public void setDeliverMan(String deliverMan) {
-        this.deliverMan = deliverMan;
+    public void setDeliveryMan(String deliveryMan) {
+        this.deliveryMan = deliveryMan;
     }
 }
