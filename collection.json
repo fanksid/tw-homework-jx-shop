@@ -100,6 +100,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "45c30c8e-c013-436d-b789-f9ceb83d9e1a",
 								"type": "text/javascript",
 								"exec": [
 									"var responseJSON;",
@@ -115,10 +116,10 @@
 									"",
 									"tests[\"Reponse data is object\"] = _.isObject(responseJSON);",
 									"tests['response has id'] = _.has(responseJSON, 'id');",
-									"tests['response has totalPrice'] = _.has(responseJSON, 'name');",
-									"tests['response has userId'] = _.has(responseJSON, 'description');",
-									"tests['response has createTime'] = _.has(responseJSON, 'price');",
-									"tests['response has purchaseItemList'] = _.has(responseJSON, 'inventory');",
+									"tests['response has name'] = _.has(responseJSON, 'name');",
+									"tests['response has description'] = _.has(responseJSON, 'description');",
+									"tests['response has price'] = _.has(responseJSON, 'price');",
+									"tests['response has inventory'] = _.has(responseJSON, 'inventory');",
 									"tests[\"Status code is 200\"] = responseCode.code === 200;"
 								]
 							}
@@ -557,6 +558,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "1b78405f-c280-4dd8-8b6b-698da24be18b",
 								"type": "text/javascript",
 								"exec": [
 									"var responseJSON;",
@@ -572,10 +574,10 @@
 									"",
 									"tests[\"Reponse data is object\"] = _.isObject(responseJSON);",
 									"tests['response has id'] = _.has(responseJSON, 'id');",
-									"tests['response has totalPrice'] = _.has(responseJSON, 'deliveryMan');",
-									"tests['response has userId'] = _.has(responseJSON, 'outboundTime');",
-									"tests['response has createTime'] = _.has(responseJSON, 'signedTime');",
-									"tests['response has purchaseItemList'] = _.has(responseJSON, 'logisticsStatus');",
+									"tests['response has deliveryMan'] = _.has(responseJSON, 'deliveryMan');",
+									"tests['response has outboundTime'] = _.has(responseJSON, 'outboundTime');",
+									"tests['response has signedTime'] = _.has(responseJSON, 'signedTime');",
+									"tests['response has status'] = _.has(responseJSON, 'status');",
 									"tests[\"Status code is 200\"] = responseCode.code === 200;",
 									""
 								]

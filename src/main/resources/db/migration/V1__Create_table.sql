@@ -15,9 +15,10 @@ CREATE TABLE `Inventory` (
 
 CREATE TABLE `Logistics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `send_time` datetime DEFAULT NULL,
-  `status` enum('UNSEND','TRANSPORT','DELIVERY','RECEIVED') DEFAULT NULL,
-  `receive_time` datetime DEFAULT NULL,
+  `outboundTime` datetime DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
+  `signedTime` datetime DEFAULT NULL,
+  `deliverMan` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
