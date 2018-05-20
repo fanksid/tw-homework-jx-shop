@@ -88,8 +88,8 @@ public class ProductController {
             Product product = optionalProduct.get();
             newProduct.setId(product.getId());
             productRepository.save(newProduct);
-            return new ResponseEntity<String>(HttpStatus.OK);
+            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 }
