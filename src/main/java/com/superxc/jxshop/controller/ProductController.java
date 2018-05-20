@@ -82,14 +82,13 @@ public class ProductController {
      */
     @PutMapping(value = "/{id}")
     public ResponseEntity<String> update(@PathVariable Long id, @RequestBody Product newProduct) {
-        // 测试有问题!
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
             newProduct.setId(product.getId());
             productRepository.save(newProduct);
-            return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<String>(HttpStatus.OK);
         }
-        return new ResponseEntity<String>(HttpStatus.OK);
+        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
     }
 }

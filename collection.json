@@ -79,7 +79,7 @@
 							"raw": "{\n\t\"name\": \"test666\",\n\t\"description\": \"test\",\n\t\"price\": 1000\n}"
 						},
 						"url": {
-							"raw": "http://{{IP}}:{{port}}/products/1",
+							"raw": "http://{{IP}}:{{port}}/products/10",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
@@ -87,7 +87,7 @@
 							"port": "{{port}}",
 							"path": [
 								"products",
-								"1"
+								"10"
 							]
 						},
 						"description": "### API功能：\n- 修改对应商品信息\n\n### 输入：\n```\n{\n\t\"name\": \"test666\",\n\t\"description\": \"test\",\n\t\"price\": 1000\n}\n```\n### 输出：\n```\n{\n    \"status\":204\n}\n```"
@@ -375,7 +375,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://{{IP}}:{{port}}/orders/1?orderStatus=paid",
+							"raw": "http://{{IP}}:{{port}}/orders/10?orderStatus=paid",
 							"protocol": "http",
 							"host": [
 								"{{IP}}"
@@ -383,7 +383,7 @@
 							"port": "{{port}}",
 							"path": [
 								"orders",
-								"1"
+								"10"
 							],
 							"query": [
 								{
