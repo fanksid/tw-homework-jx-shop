@@ -15,7 +15,13 @@ public class Product {
 
     private Double price;
 
-//    private Long inventory;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Inventory inventory;
+
+    public Inventory getInventory() {
+        return inventory;
+    }
 
     public Product() {
     }
@@ -24,6 +30,13 @@ public class Product {
         this.name = name;
         this.description = description;
         this.price = price;
+    }
+
+    public Product(String name, String description, Double price, Inventory inventory) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.inventory = inventory;
     }
 
     public Long getId() {
