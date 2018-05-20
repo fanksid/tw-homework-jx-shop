@@ -122,4 +122,20 @@ public class Order {
     public void setCancelTime(Timestamp cancelTime) {
         this.cancelTime = cancelTime;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", status='" + status + '\'' +
+                ", createTime=" + createTime +
+                ", payTime=" + payTime +
+                ", logisticsId=" + logisticsId +
+                ", userId=" + userId +
+                ", cancelTime=" + cancelTime +
+                ", finishTime=" + finishTime +
+                ", totalPrice=" + totalPrice +
+                ", purchaseItemList=" + purchaseItemList +
+                '}';
+    }
 }

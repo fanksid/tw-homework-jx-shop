@@ -70,4 +70,15 @@ public class Logistics {
     public void setDeliveryMan(String deliveryMan) {
         this.deliveryMan = deliveryMan;
     }
+
+    @Override
+    public String toString() {
+        return "Logistics{" +
+                "id=" + id +
+                ", outboundTime=" + outboundTime +
+                ", status='" + status + '\'' +
+                ", signedTime=" + signedTime +
+                ", deliveryMan='" + deliveryMan + '\'' +
+                '}';
+    }
 }

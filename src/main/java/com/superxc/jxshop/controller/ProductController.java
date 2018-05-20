@@ -65,7 +65,7 @@ public class ProductController {
         HttpHeaders headers = new HttpHeaders();
 
         headers.add("location", String.format("http://%s:%s/products/%d", host, port, savedProduct.getId()));
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     /**
@@ -94,8 +94,8 @@ public class ProductController {
             Product product = optionalProduct.get();
             newProduct.setId(product.getId());
             productRepository.save(newProduct);
-            return new ResponseEntity<String>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

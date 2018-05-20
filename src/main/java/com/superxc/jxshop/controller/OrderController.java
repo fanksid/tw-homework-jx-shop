@@ -43,12 +43,12 @@ public class OrderController {
     public ResponseEntity<String> add(@RequestBody List<OrderItem> orderItems) {
         Order order = orderService.newOrder(orderItems);
         if (order == null) {
-            return new ResponseEntity<String>("purchase failed", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("purchase failed", HttpStatus.BAD_REQUEST);
         }
         HttpHeaders headers = new HttpHeaders();
 
         headers.add("location", String.format("http://%s:%s/orders/%d", host, port, order.getId()));
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     /**
@@ -77,7 +77,6 @@ public class OrderController {
     public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam String orderStatus) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
             switch (orderStatus) {
                 case PAID:
                     orderService.pay(id);
@@ -87,9 +86,9 @@ public class OrderController {
                     break;
             }
 
-            return new ResponseEntity<String>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /**

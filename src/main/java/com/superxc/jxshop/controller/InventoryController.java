@@ -32,8 +32,8 @@ public class InventoryController {
             Inventory inventory = optionalInventory.get();
             inventory.setCount(newInventory.getCount());
             inventoryRepository.save(inventory);
-            return new ResponseEntity<String>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
-        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
