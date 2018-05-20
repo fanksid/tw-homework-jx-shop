@@ -10,6 +10,7 @@ import com.superxc.jxshop.repository.OrderRepository;
 import com.superxc.jxshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -29,6 +30,7 @@ public class OrderService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+    @Transactional
     public Order newOrder(List<OrderItem> orderItems) {
         Order order = new Order();
         order.setCreateTime(new Timestamp(System.currentTimeMillis()));

@@ -1,8 +1,14 @@
 package com.superxc.jxshop.controller;
 
+import com.superxc.jxshop.entity.Inventory;
+import com.superxc.jxshop.entity.Logistics;
 import com.superxc.jxshop.entity.Order;
 import com.superxc.jxshop.entity.OrderItem;
+import com.superxc.jxshop.repository.InventoryRepository;
+import com.superxc.jxshop.repository.LogisticsRepository;
 import com.superxc.jxshop.repository.OrderRepository;
+import com.superxc.jxshop.repository.ProductRepository;
+import com.superxc.jxshop.service.InventoryService;
 import com.superxc.jxshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +24,23 @@ import java.util.Optional;
 @RequestMapping(value = "/orders")
 public class OrderController {
 
+    private static final String PAID = "paid";
+    private static final String WITHDRAWN = "withdrawn";
+
     @Autowired
     private OrderRepository orderRepository;
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private LogisticsRepository logisticsRepository;
+
+    @Autowired
+    private InventoryRepository inventoryRepository;
+
+    @Autowired
+    private InventoryService inventoryService;
 
     /**
      * create a order
@@ -67,12 +86,38 @@ public class OrderController {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
-            // TODO: 这里应当校验输入的status的合法性
-            order.setStatus(orderStatus);
-            orderRepository.save(order);
+            switch (orderStatus) {
+                case PAID:
+                    order.setStatus(PAID);
+                    order.setPayTime(new Timestamp(System.currentTimeMillis()));
+
+                    Logistics logistics = new Logistics(null, "inbound", null, null);
+                    logistics = logisticsRepository.save(logistics);
+
+                    order.setLogisticsId(logistics.getId());
+                    orderRepository.save(order);
+                    break;
+                case WITHDRAWN:
+                    order.setStatus(WITHDRAWN);
+                    order.setCancelTime(new Timestamp(System.currentTimeMillis()));
+                    orderRepository.save(order);
+
+                    unlockInventory(order);
+                    break;
+            }
+
             return new ResponseEntity<String>(HttpStatus.OK);
         }
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    }
+
+    private void unlockInventory(Order order) {
+        for (OrderItem orderItem : order.getPurchaseItemList()) {
+            Optional<Inventory> optionalInventory = inventoryRepository.findById(orderItem.getProductId());
+            if (optionalInventory.isPresent()) {
+                inventoryService.unlockCount(optionalInventory.get(), orderItem.getPurchaseCount());
+            }
+        }
     }
 
     /**
