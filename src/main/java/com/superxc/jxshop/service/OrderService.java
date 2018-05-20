@@ -8,10 +8,7 @@ import com.superxc.jxshop.repository.InventoryRepository;
 import com.superxc.jxshop.repository.OrderItemRepository;
 import com.superxc.jxshop.repository.OrderRepository;
 import com.superxc.jxshop.repository.ProductRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
