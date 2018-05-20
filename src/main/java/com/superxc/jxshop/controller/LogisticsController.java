@@ -1,9 +1,7 @@
 package com.superxc.jxshop.controller;
 
 import com.superxc.jxshop.entity.Logistics;
-import com.superxc.jxshop.entity.Order;
 import com.superxc.jxshop.repository.LogisticsRepository;
-import com.superxc.jxshop.repository.OrderRepository;
 import com.superxc.jxshop.service.LogisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
