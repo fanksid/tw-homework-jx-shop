@@ -18,7 +18,7 @@ CREATE TABLE `Logistics` (
   `outboundTime` datetime DEFAULT NULL,
   `status` varchar(30) DEFAULT NULL,
   `signedTime` datetime DEFAULT NULL,
-  `deliverMan` varchar(20) DEFAULT NULL,
+  `deliveryMan` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

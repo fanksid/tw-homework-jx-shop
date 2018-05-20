@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/logisticsRecords")
@@ -27,7 +28,11 @@ public class LogisticsController {
 
     @GetMapping(value = "/{id}")
     public Logistics get(@PathVariable Long id) {
-        return logisticsRepository.getOne(id);
+        Optional<Logistics> optionalLogistics = logisticsRepository.findById(id);
+        if (optionalLogistics.isPresent()) {
+            return optionalLogistics.get();
+        }
+        return null;
     }
 
 

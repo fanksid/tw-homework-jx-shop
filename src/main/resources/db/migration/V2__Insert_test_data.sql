@@ -7,3 +7,6 @@ INSERT INTO Inventory (productId, count) VALUES(1, 0);
 INSERT INTO Inventory (productId, count) VALUES(2, 3);
 INSERT INTO Inventory (productId, count) VALUES(3, 5);
 INSERT INTO Inventory (productId, count) VALUES(4, 7);
+
+INSERT INTO Logistics(outboundTime, status) VALUES(NOW(), 'inbound');
+INSERT INTO jxOrder(status, createTime, payTime, logisticsId, userId) VALUES('payed', NOW(), NOW(), 1, 1);
