@@ -10,11 +10,22 @@ public class Inventory {
 
     private Long count;
 
+    private Long countLock;
+
     public Inventory() {
     }
 
-    public Inventory(Long count) {
+    public Inventory(Long count, Long countLock) {
         this.count = count;
+        this.countLock = countLock;
+    }
+
+    public Long getCountLock() {
+        return countLock;
+    }
+
+    public void setCountLock(Long countLock) {
+        this.countLock = countLock;
     }
 
     public Long getProductId() {
@@ -38,6 +49,7 @@ public class Inventory {
         return "Inventory{" +
                 "productId=" + productId +
                 ", count=" + count +
+                ", countLock=" + countLock +
                 '}';
     }
 }

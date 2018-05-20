@@ -8,7 +8,8 @@ CREATE TABLE `Product` (
 
 CREATE TABLE `Inventory` (
   `productId` int(11) NOT NULL,
-  `count` int(11) NOT NULL,
+  `count` int(11) NOT NULL COMMENT '实际库存数量',
+  `countLock` int(11) DEFAULT '0' COMMENT '锁定的库存数量',
   KEY `productId` (`productId`),
   CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`productId`) REFERENCES `Product` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

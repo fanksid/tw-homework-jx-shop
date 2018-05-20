@@ -32,6 +32,9 @@ public class OrderController {
     @PostMapping()
     public ResponseEntity<String> add(@RequestBody List<OrderItem> orderItems) {
         Order order = orderService.newOrder(orderItems);
+        if (order == null) {
+            return new ResponseEntity<String>("purchase failed", HttpStatus.BAD_REQUEST);
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.add("location", "http://localhost:8083/orders/" + order.getId());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
