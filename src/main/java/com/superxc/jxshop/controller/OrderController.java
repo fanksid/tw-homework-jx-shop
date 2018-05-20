@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(value = "/orders")
 public class OrderController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping(value = "/orders")
+    @PostMapping()
     public ResponseEntity<String> add(@RequestBody List<OrderItem> orderItems) {
         Order order = orderService.newOrder(orderItems);
         HttpHeaders headers = new HttpHeaders();
@@ -30,7 +31,7 @@ public class OrderController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/orders/{id}")
+    @GetMapping(value = "/{id}")
     public Order get(@PathVariable Long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isPresent()) {
@@ -39,7 +40,7 @@ public class OrderController {
         return null;
     }
 
-    @PutMapping(value = "/orders/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam String orderStatus) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (optionalOrder.isPresent()) {
