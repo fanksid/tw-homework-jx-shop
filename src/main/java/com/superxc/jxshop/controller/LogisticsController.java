@@ -26,6 +26,12 @@ public class LogisticsController {
     @Autowired
     private OrderRepository orderRepository;
 
+    /**
+     * get logistics by id
+     *
+     * @param id logistics id
+     * @return
+     */
     @GetMapping(value = "/{id}")
     public Logistics get(@PathVariable Long id) {
         Optional<Logistics> optionalLogistics = logisticsRepository.findById(id);
@@ -35,7 +41,14 @@ public class LogisticsController {
         return null;
     }
 
-
+    /**
+     * update logistics status and order status
+     *
+     * @param logisticsId
+     * @param orderId
+     * @param logisticsStatus
+     * @return
+     */
     @PutMapping(value = "/{logisticsId}/orders/{orderId}")
     public ResponseEntity<String> updateStatus(@PathVariable Long logisticsId,
                                                @PathVariable Long orderId,

@@ -26,10 +26,10 @@ public class OrderService {
     public Order newOrder(List<OrderItem> orderItems) {
         Order order = new Order();
         order.setCreateTime(new Timestamp(System.currentTimeMillis()));
-//        order.setLogisticsId(1L);
-        order.setStatus("UNPAID");
+        order.setStatus("unpaid");
         order.setUserId(1L);
         order = orderRepository.save(order);
+        double totalPrice = 0;
 
         for (OrderItem orderItem : orderItems) {
             orderItem.setOrderId(order.getId());
@@ -41,8 +41,10 @@ public class OrderService {
             orderItem.setSnapshotPrice(product.getPrice());
 
             orderItemRepository.save(orderItem);
+            totalPrice += product.getPrice() * orderItem.getPurchaseCount();
         }
-        return order;
+        order.setTotalPrice(totalPrice);
+        return orderRepository.save(order);
     }
 
 }

@@ -10,3 +10,6 @@ INSERT INTO Inventory (productId, count) VALUES(4, 7);
 
 INSERT INTO Logistics(outboundTime, status) VALUES(NOW(), 'inbound');
 INSERT INTO jxOrder(status, createTime, payTime, logisticsId, userId) VALUES('payed', NOW(), NOW(), 1, 1);
+
+INSERT INTO OrderItem(orderId, productId, purchaseCount, snapshotName, snapshotDescription, snapshotPrice) VALUES(1, 1, 2, '方便面', '不好吃', 2.5);
+INSERT INTO OrderItem(orderId, productId, purchaseCount, snapshotName, snapshotDescription, snapshotPrice) VALUES(1, 2, 3, '电脑', '坚如磐石', 5999);

@@ -27,6 +27,8 @@ public class Order {
 
     private Timestamp finishTime;
 
+    private Double totalPrice;
+
     public Timestamp getFinishTime() {
         return finishTime;
     }
@@ -37,16 +39,24 @@ public class Order {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "orderId")
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private List<OrderItem> purchaseItemList = new ArrayList<>();
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public List<OrderItem> getPurchaseItemList() {
+        return purchaseItemList;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Order() {
     }
 
-    public Order(String status, Timestamp createTime, Timestamp payTime, Long logisticsId, Long userId, Timestamp cancelTime, Timestamp finishTime) {
+    public Order(String status, Timestamp createTime, Timestamp payTime, Long logisticsId, Long userId, Timestamp cancelTime, Timestamp finishTime, Double totalPrice) {
         this.status = status;
         this.createTime = createTime;
         this.payTime = payTime;
@@ -54,6 +64,7 @@ public class Order {
         this.userId = userId;
         this.cancelTime = cancelTime;
         this.finishTime = finishTime;
+        this.totalPrice = totalPrice;
     }
 
     public Long getId() {

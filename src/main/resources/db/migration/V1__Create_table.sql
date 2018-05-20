@@ -31,6 +31,7 @@ CREATE TABLE `jxOrder` (
   `userId` int(11) NOT NULL,
   `cancelTime` datetime DEFAULT NULL,
   `finishTime` datetime DEFAULT NULL,
+  `totalPrice` double(11,0) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `logistics_id` (`logisticsId`),
   CONSTRAINT `jxOrder_ibfk_1` FOREIGN KEY (`logisticsId`) REFERENCES `Logistics` (`id`) ON UPDATE NO ACTION
