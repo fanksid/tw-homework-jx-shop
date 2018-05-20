@@ -1,0 +1,3 @@
+dbs:
+  database:
+    host: localhost

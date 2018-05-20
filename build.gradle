@@ -39,3 +39,6 @@ flyway {
 	user = 'root'
 	password = '123456'
 }
+test {
+	systemProperty("spring.profiles.active", project.properties.get("springProfiles"))
+}
