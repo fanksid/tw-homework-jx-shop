@@ -77,7 +77,7 @@ public class ProductController {
     @GetMapping(value = "/{id}")
     public Product getById(@PathVariable Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        return optionalProduct.isPresent() ? optionalProduct.get() : null;
+        return optionalProduct.orElse(null);
     }
 
     /**

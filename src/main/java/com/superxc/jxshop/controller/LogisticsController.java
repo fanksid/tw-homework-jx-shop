@@ -33,10 +33,7 @@ public class LogisticsController {
     @GetMapping(value = "/{id}")
     public Logistics get(@PathVariable Long id) {
         Optional<Logistics> optionalLogistics = logisticsRepository.findById(id);
-        if (optionalLogistics.isPresent()) {
-            return optionalLogistics.get();
-        }
-        return null;
+        return optionalLogistics.orElse(null);
     }
 
     /**

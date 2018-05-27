@@ -60,10 +60,7 @@ public class OrderController {
     @GetMapping(value = "/{id}")
     public Order get(@PathVariable Long id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
-        if (optionalOrder.isPresent()) {
-            return optionalOrder.get();
-        }
-        return null;
+        return optionalOrder.orElse(null);
     }
 
     /**

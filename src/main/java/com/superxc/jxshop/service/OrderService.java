@@ -59,9 +59,7 @@ public class OrderService {
     private void unlockInventory(Order order) {
         for (OrderItem orderItem : order.getPurchaseItemList()) {
             Optional<Inventory> optionalInventory = inventoryRepository.findById(orderItem.getProductId());
-            if (optionalInventory.isPresent()) {
-                inventoryService.unlockCount(optionalInventory.get(), orderItem.getPurchaseCount());
-            }
+            optionalInventory.ifPresent(inventory -> inventoryService.unlockCount(inventory, orderItem.getPurchaseCount()));
         }
     }
 
